@@ -14,6 +14,6 @@ Created with ♥ by the [Monkee-Boy Troop](http://monkee-boy.com) in Austin, Tex
 
 ## License
 
-MIT
+mBoy Issues is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
 
 ![Monkee-Boy](http://www.monkee-boy.com/img/logo-withtag-vertical-dark.jpg)
