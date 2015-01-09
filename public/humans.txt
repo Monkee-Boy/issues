@@ -1,0 +1,38 @@
+# The humans responsible & technology colophon
+# humanstxt.org
+
+/* THE MONKEE-BOY TROOP */
+
+  Aaron Bramwell   -- Founder + CEO
+  Joe Pickerill    -- Partner/Marketing Director
+  Andrea Tucker    -- Project Manager
+  Kevin Newsum     -- Customer Success Director
+  James Fleeting   -- Sr. Web Developer
+  Pete Gautier     -- Sr. Web Developer
+  Sarah Higley     -- Web Developer
+  John Hoover      -- Web Developer
+  Nikki Hampson    -- Creative Director
+  Stephanie Cain   -- Web + Mobile Designer
+  Autumn Hutchins  -- Web + Mobile Designer
+  Jessica Bergman  -- Quality Assurance
+
+  Join The Troop   -- http://monkee-boy.com
+
+/* SITE */
+    Standards: HTML, CSS, JavaScript, PHP
+    Components: Modernizr, jQuery, SASS, GulpJS, Susy, Bower
+    Software: Laravel, Git, GitHub
+
+
+   ##     ##    #####    ##    ##   ##   ##  #######  #######         #####      #####   ##    ##
+  ###    ###   #######   ###   ##   ##  ##   #######  #######         ######    #######  ##    ##
+  ####   ###  ##     ##  ###   ##   ## ##    ##       ##              ##  ##   ##     ## ##    ##
+  ####  ####  ##     ##  ####  ##   ####     ##       ##              ##  ##   ##     ##  ##  ##
+  ## #### ##  ##     ##  ## ## ##   ####     ######   ######   ####   ######   ##     ##   ####
+  ##  ##  ##  ##     ##  ## ## ##   #####    ######   ######   ####   ######   ##     ##    ##
+  ##  ##  ##  ##     ##  ##  ####   ## ###   ##       ##              ##   ##  ##     ##    ##
+  ##      ##  ##     ##  ##   ###   ##  ##   ##       ##              ##   ##  ##     ##    ##
+  ##      ##   #######   ##   ###   ##   ##  #######  #######         #######   #######     ##
+  ##      ##    #####    ##    ##   ##   ### #######  #######         ######     #####      ##
+
+  http://monkee-boy.com        http://twitter.com/monkeeboy        https://github.com/monkee-boy
