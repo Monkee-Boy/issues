@@ -5,10 +5,6 @@
     "jquery": "2.1.3",
     "susy": "latest",
     "monkee-mixins": "latest",
-    "normalize.css": "latest",
-    "polymer": "Polymer/polymer#~0.5.2",
-    "core-ajax": "Polymer/core-ajax#~0.5.2",
-    "webcomponentsjs": "~0.5.2",
-    "paper-elements": "Polymer/paper-elements#~0.5.2"
+    "foundation": "latest"
   }
 }

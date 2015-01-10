@@ -17,6 +17,7 @@ class CreateProjectsTable extends Migration {
 			$table->increments('id');
 			$table->string('title', 255);
 			$table->integer('created_by')->unsigned()->index();
+			$table->foreign('created_by')->references('id')->on('users');
 			$table->timestamps();
 			$table->softDeletes();
 		});

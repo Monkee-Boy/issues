@@ -15,8 +15,10 @@ class CreateIssueNotificationsTable extends Migration {
 		Schema::create('issue_notifications', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->integer('issueid')->unsigned()->index();
-			$table->integer('userid')->unsigned()->index();
+			$table->integer('issue_id')->unsigned()->index();
+			$table->foreign('issue_id')->references('id')->on('issues');
+			$table->integer('user_id')->unsigned()->index();
+			$table->foreign('user_id')->references('id')->on('users');
 			$table->boolean('status');
 			$table->timestamps();
 			$table->softDeletes();
