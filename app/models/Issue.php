@@ -1,6 +1,10 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Issue extends Eloquent {
+  use SoftDeletingTrait;
+
+  protected $dates = ['deleted_at'];
 
   /**
   * The table associated with the model.
@@ -24,6 +28,16 @@ class Issue extends Eloquent {
   public function labels()
   {
     return $this->belongsToMany('Label');
+  }
+
+  /**
+  * Project relationship
+  *
+  * @return Relationship
+  */
+  public function project()
+  {
+    return $this->belongsTo('Project');
   }
 
   /**
@@ -51,7 +65,7 @@ class Issue extends Eloquent {
   *
   * @return Relationship
   */
-  public function user()
+  public function createdby()
   {
     return $this->belongsTo('User', 'created_by');
   }

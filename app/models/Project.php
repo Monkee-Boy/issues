@@ -1,7 +1,7 @@
 <?php
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class Status extends Eloquent {
+class Project extends Eloquent {
   use SoftDeletingTrait;
 
   protected $dates = ['deleted_at'];
@@ -11,14 +11,14 @@ class Status extends Eloquent {
   *
   * @var string
   */
-  protected $table = 'statuses';
+  protected $table = 'projects';
 
   /**
   * The attributes excluded from the model's JSON form.
   *
   * @var array
   */
-  protected $fillable = array('name');
+  protected $fillable = array('title');
 
   /**
   * Issues Relationship
@@ -28,6 +28,16 @@ class Status extends Eloquent {
   public function issues()
   {
     return $this->hasMany('Issue');
+  }
+
+  /**
+  * Users Relationship
+  *
+  * @return Relationship
+  */
+  public function users()
+  {
+    return $this->belongsToMany('User', 'user_projects');
   }
 
 }

@@ -13,7 +13,7 @@
   <nav class="top-bar" data-topbar role="navigation">
     <ul class="title-area">
       <li class="name">
-        <h1><?= link_to_route('issues.index', 'mBoy Issues'); ?></h1>
+        <h1><?= link_to_route('projects.index', 'mBoy Issues'); ?></h1>
       </li>
 
       <li class="toggle-topbar menu-icon"><a href="#"><span></span></a></li>
@@ -22,7 +22,7 @@
     <section class="top-bar-section">
       <!-- Right Nav Section -->
       <ul class="right">
-        <li class="active"><?= link_to_route('issues.create', 'Create Issue'); ?></li>
+        <li class="active"><?= link_to_route('projects.index', 'View Projects'); ?></li>
         <li><a href="#">Logout</a></li>
       </ul>
     </section>

@@ -1,15 +1,25 @@
 <?php
 class IssueController extends BaseController {
+  private $project_id = 1; /* Hardcoded for dev. */
+  private $user_id = 1; /* Hardcoded for dev. */
+
   /**
   * Display a listing of the resource.
   *
+  * @param  int  $project_id
   * @return Response
   */
-  public function index()
+  public function index($project_id)
   {
-    $issues = Issue::with('labels', 'status', 'priority', 'user')->get();
+    $project = Project::find($project_id);
 
-    $this->layout->content = View::make('issue.index', array('issues' => $issues));
+    if(empty($project)) {
+      App::abort(404, 'Project not found.');
+    }
+
+    $issues = Issue::where('project_id', $project_id)->with('labels', 'status', 'priority', 'project', 'createdby')->get();
+
+    $this->layout->content = View::make('issues.index', array('issues' => $issues, 'project' => $project));
   }
 
   /**
@@ -18,23 +28,31 @@ class IssueController extends BaseController {
   * @param  int  $id
   * @return Response
   */
-  public function show($id)
+  public function show($project_id, $issue_id)
   {
-    $issue = Issue::find($id);
+    $project = Project::find($project_id);
+    $issue = Issue::find($issue_id);
 
-    $this->layout->content = View::make('issue.show')->with('issue', $issue);
+    $this->layout->content = View::make('issues.show', array('project' => $project, 'issue' => $issue));
   }
 
   /**
   * Show the form for creating a new resource.
   *
+  * @param  int  $project_id
   * @return Response
   */
-  public function create()
+  public function create($project_id)
   {
+    $project = Project::find($project_id);
+
+    if(empty($project)) {
+      App::abort(404, 'Project not found.');
+    }
+
     $priorities = Priority::all()->lists('name','id');
 
-    $this->layout->content = View::make('issue.create', array('priorities' => $priorities));
+    $this->layout->content = View::make('issues.create', array('priorities' => $priorities, 'project' => $project));
   }
 
   /**
@@ -53,7 +71,7 @@ class IssueController extends BaseController {
     $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
-      return Redirect::to('issues/create')->withErrors($validator)->withInput(Input::all());
+      return Redirect::route('project_issues_create', $this->project_id)->withErrors($validator)->withInput(Input::all());
     } else {
       $issue = new Issue;
       $issue->title = Input::get('title');
@@ -61,12 +79,13 @@ class IssueController extends BaseController {
       $issue->link = Input::get('link');
       $issue->status_id = 1;
       $issue->priority_id = Input::get('priority_id');
-      $issue->created_by = 1; /* Hardcoded for dev. */
+      $issue->project_id = $this->project_id;
+      $issue->created_by = $this->user_id;
 
       $issue->save();
 
-      Session::flash('message', 'Successfully created nerd!');
-      return Redirect::to('issues');
+      Session::flash('message', 'Successfully created issue!');
+      return Redirect::route('project_issues', $this->project_id);
     }
   }
 
@@ -76,13 +95,14 @@ class IssueController extends BaseController {
   * @param  int  $id
   * @return Response
   */
-  public function edit($id)
+  public function edit($project_id, $issue_id)
   {
-    $issue = Issue::find($id);
+    $project = Project::find($project_id);
+    $issue = Issue::find($issue_id);
     $priorities = Priority::all()->lists('name','id');
     $statuses = Status::all()->lists('name','id');
 
-    $this->layout->content = View::make('issue.edit', array('issue' => $issue, 'priorities' => $priorities, 'statuses' => $statuses));
+    $this->layout->content = View::make('issues.edit', array('project' => $project, 'issue' => $issue, 'priorities' => $priorities, 'statuses' => $statuses));
   }
 
   /**
@@ -103,7 +123,7 @@ class IssueController extends BaseController {
 
 
     if ($validator->fails()) {
-      return Redirect::to('issue.edit', $id)->withErrors($validator)->withInput(Input::all());
+      return Redirect::route('project_issues_edit', array('project_id' => $this->project_id, 'issue_id' => $id))->withErrors($validator)->withInput(Input::all());
     } else {
       $issue = Issue::find($id);
       $issue->title = Input::get('title');
@@ -114,12 +134,22 @@ class IssueController extends BaseController {
       $issue->save();
 
       Session::flash('message', 'Successfully updated issue!');
-      return Redirect::to('issues');
+      return Redirect::route('project_issues', $this->project_id);
     }
   }
 
-  public function destroy()
+  /**
+  * Remove the specified resource in storage.
+  *
+  * @param  int  $id
+  * @return Response
+  */
+  public function destroy($id)
   {
+    $issue = Issue::find($id);
+    $issue->delete();
 
+    Session::flash('message', 'Successfully deleted the issue!');
+    return Redirect::route('project_issues', $this->project_id);
   }
 }

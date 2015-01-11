@@ -1,10 +1,12 @@
 <div class="row">
   <div class="large-8 columns">
-    <h1>issues/index</h1>
+    <h1><?= $project->title; ?></h1>
   </div>
 
   <div class="large-4 columns">
-    <?php //link_to_route('issues.create', 'Create Issue', array(), array('class' => 'button small right')); ?>
+    <ul class="button-group right">
+      <li><?= link_to_route('project_issues_create', 'Create Issue', $project->id, array('class' => 'button small')); ?></li>
+    </ul>
   </div>
 </div>
 
@@ -25,7 +27,7 @@
   <?php foreach($issues as $issue) { ?>
     <tr>
       <td><?= $issue->id; ?></td>
-      <td><?= link_to_route('issues.show', $issue->title, $issue->id); ?></td>
+      <td><?= link_to_route('project_issues_show', $issue->title, array('project_id' => $project->id, 'issue_id' => $issue->id)); ?></td>
       <td><span class="label<?php if($issue->status->name == 'new') { ?> alert<?php } elseif($issue->status->name == 'complete') { ?> success<?php } else { ?> secondary<?php } ?>"><?= $issue->status->name; ?></span></td>
       <td><?= $issue->priority->name; ?></td>
       <td>
@@ -33,10 +35,9 @@
           <?= $label->name; ?>,
         <?php } ?>
       </td>
-      <td><?= $issue->user->name; ?></td>
+      <td><?= $issue->createdby->name; ?></td>
       <td>
-        <?= link_to_route('issues.edit', 'Edit &bull;', $issue->id); ?>
-        <?= link_to_route('issues.show', 'View', $issue->id); ?>
+        <?= link_to_route('project_issues_show', 'View', array('project_id' => $project->id, 'issue_id' => $issue->id)); ?>
       </td>
     </tr>
   <?php } ?>

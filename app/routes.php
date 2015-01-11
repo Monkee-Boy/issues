@@ -12,4 +12,10 @@
 */
 
 Route::get('/', 'HomeController@showWelcome');
-Route::resource('issues', 'IssueController');
+Route::resource('issues', 'IssueController', array('only' => array('store', 'update', 'destroy')));
+
+Route::resource('projects', 'ProjectController');
+Route::get('projects/{project_id}/issues', array('as' => 'project_issues', 'uses' => 'IssueController@index'));
+Route::get('projects/{project_id}/issues/create', array('as' => 'project_issues_create', 'uses' => 'IssueController@create'));
+Route::get('projects/{project_id}/issues/{issue_id}', array('as' => 'project_issues_show', 'uses' => 'IssueController@show'));
+Route::get('projects/{project_id}/issues/{issue_id}/edit', array('as' => 'project_issues_edit', 'uses' => 'IssueController@edit'));

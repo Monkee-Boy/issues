@@ -26,6 +26,8 @@ class CreateIssuesTable extends Migration {
 			$table->integer('priority_id')->unsigned()->index();
 			$table->foreign('priority_id')->references('id')->on('priorities');
 			$table->integer('parentid')->nullable()->unsigned()->index();
+			$table->integer('project_id')->unsigned()->index();
+			$table->foreign('project_id')->references('id')->on('projects');
 			$table->integer('created_by')->unsigned()->index();
 			$table->foreign('created_by')->references('id')->on('users');
 			$table->timestamps();

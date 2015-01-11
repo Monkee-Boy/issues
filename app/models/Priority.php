@@ -1,6 +1,10 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class Priority extends Eloquent {
+  use SoftDeletingTrait;
+
+  protected $dates = ['deleted_at'];
 
   /**
   * The table associated with the model.

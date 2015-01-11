@@ -4,7 +4,7 @@
   </div>
 
   <div class="large-4 columns">
-    <?= link_to_route('issues.index', 'View Issues', array(), array('class' => 'button small right')); ?>
+    <?= link_to_route('project_issues', 'View Issues', array('project_id' => $project->id), array('class' => 'button small right')); ?>
   </div>
 </div>
 

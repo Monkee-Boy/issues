@@ -1,6 +1,10 @@
 <?php
+use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
 class User extends Eloquent {
+  use SoftDeletingTrait;
+
+  protected $dates = ['deleted_at'];
 
   /**
   * The table associated with the model.
@@ -24,6 +28,16 @@ class User extends Eloquent {
   public function issues()
   {
     return $this->hasMany('Issue');
+  }
+
+  /**
+  * Projects Relationship
+  *
+  * @return Relationship
+  */
+  public function projects()
+  {
+    return $this->belongsToMany('Project', 'user_projects');
   }
 
 }

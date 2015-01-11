@@ -17,6 +17,7 @@ class CreatePrioritiesTable extends Migration {
 			$table->increments('id');
 			$table->string('name', 255);
 			$table->timestamps();
+			$table->softDeletes();
 		});
 	}
 
