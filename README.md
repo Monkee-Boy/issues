@@ -1,8 +1,15 @@
 ![Monkee-Boy](https://dujrsrsgsd3nh.cloudfront.net/img/emoticons/113009/mboy-1403710932.jpg) Issues [![GitHub version](https://badge.fury.io/gh/monkee-boy%2Fissues.svg)](http://badge.fury.io/gh/monkee-boy%2Fissues)
 ===========
 
-mBoy Issues has a goal of improving our current QA process of using Google Spreadsheets as a punchlist. We love GitHub issues but unfortunately it doesn't fit entirely into our workflow. Think of this as a simple clone of GitHub issues aimed at the QA phase of a project.
+mBoy Issues has a goal of improving our current QA process of using Google Spreadsheets as a punchlist. We love GitHub issues but unfortunately it doesn't fit entirely into our workflow. Think of this as a simple clone of GitHub issues aimed at the QA phase of a project. Coded with Laravel and Polymer.
 
+## Setup
+
+<TODO: Actually have install docs.>
+
+* Setup database and run migrations - `php artisan migrate`
+* Install packages - `npm install`
+* Install components - `bower install`
 
 ## The Troop
 
