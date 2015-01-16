@@ -17,6 +17,8 @@
 <?php } ?>
 
 <?= Form::open(array('route' => array('issues.store'))); ?>
+  <?= Form::hidden('project_id', $project->id); ?>
+
   <?= '<p>'.Form::label('title', 'Title'); ?>
   <?= Form::text('title').'</p>'; ?>
 

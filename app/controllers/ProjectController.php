@@ -7,7 +7,7 @@ class ProjectController extends BaseController {
   */
   public function index()
   {
-    $user = User::find(1); /* TODO: Needs to be current logged in user. Hardcoded for dev. */
+    $user = User::find(Auth::user()->id);
     $projects = $user->projects;
 
     $this->layout->content = View::make('projects.index', array('projects' => $projects));
@@ -52,9 +52,9 @@ class ProjectController extends BaseController {
     } else {
       $project = new Project;
       $project->title = Input::get('title');
-      $project->created_by = 1; /* Hardcoded for dev. */
-
+      $project->created_by = Auth::user()->id;
       $project->save();
+      $project->users()->attach(Auth::user()->id);
 
       Session::flash('message', 'Successfully created project!');
       return Redirect::to('projects');

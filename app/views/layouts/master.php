@@ -20,11 +20,18 @@
     </ul>
 
     <section class="top-bar-section">
-      <!-- Right Nav Section -->
-      <ul class="right">
-        <li class="active"><?= link_to_route('projects.index', 'View Projects'); ?></li>
-        <li><a href="#">Logout</a></li>
-      </ul>
+      <?php if(Auth::check()) { ?>
+        <ul class="right">
+          <li class="active"><?= link_to_route('projects.index', 'View Projects'); ?></li>
+          <li class="has-dropdown">
+            <a href="#"><?= Auth::user()->email; ?></a>
+            <ul class="dropdown">
+              <li><a href="#">Edit Profile</a></li>
+              <li><a href="/logout">Logout</a></li>
+            </ul>
+          </li>
+        </ul>
+      <?php } ?>
     </section>
   </nav>
 

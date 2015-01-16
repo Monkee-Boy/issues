@@ -1,7 +1,6 @@
 <?php
 class IssueController extends BaseController {
-  private $project_id = 1; /* Hardcoded for dev. */
-  private $user_id = 1; /* Hardcoded for dev. */
+  private $default_status = 1;
 
   /**
   * Display a listing of the resource.
@@ -71,21 +70,21 @@ class IssueController extends BaseController {
     $validator = Validator::make(Input::all(), $rules);
 
     if ($validator->fails()) {
-      return Redirect::route('project_issues_create', $this->project_id)->withErrors($validator)->withInput(Input::all());
+      return Redirect::route('project_issues_create', Input::get('project_id'))->withErrors($validator)->withInput(Input::all());
     } else {
       $issue = new Issue;
       $issue->title = Input::get('title');
       $issue->content = Input::get('content');
       $issue->link = Input::get('link');
-      $issue->status_id = 1;
+      $issue->status_id = $this->default_status;
       $issue->priority_id = Input::get('priority_id');
-      $issue->project_id = $this->project_id;
-      $issue->created_by = $this->user_id;
+      $issue->project_id = Input::get('project_id');
+      $issue->created_by = Auth::user()->id;
 
       $issue->save();
 
       Session::flash('message', 'Successfully created issue!');
-      return Redirect::route('project_issues', $this->project_id);
+      return Redirect::route('project_issues', Input::get('project_id'));
     }
   }
 

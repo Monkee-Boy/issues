@@ -1,7 +1,9 @@
 <?php
+use Illuminate\Auth\UserInterface;
+use Illuminate\Auth\Reminders\RemindableInterface;
 use Illuminate\Database\Eloquent\SoftDeletingTrait;
 
-class User extends Eloquent {
+class User extends Eloquent implements UserInterface, RemindableInterface {
   use SoftDeletingTrait;
 
   protected $dates = ['deleted_at'];
@@ -18,7 +20,7 @@ class User extends Eloquent {
   *
   * @var array
   */
-  protected $fillable = array('name');
+  protected $hidden = array('password', 'remember_token');
 
   /**
   * Issues Relationship
@@ -38,6 +40,36 @@ class User extends Eloquent {
   public function projects()
   {
     return $this->belongsToMany('Project', 'user_projects');
+  }
+
+  public function getAuthIdentifier()
+  {
+    return $this->getKey();
+  }
+
+  public function getAuthPassword()
+  {
+    return $this->password;
+  }
+
+  public function getRememberToken()
+  {
+    return $this->remember_token;
+  }
+
+  public function setRememberToken($value)
+  {
+    $this->remember_token = $value;
+  }
+
+  public function getRememberTokenName()
+  {
+    return "remember_token";
+  }
+  
+  public function getReminderEmail()
+  {
+    return $this->email;
   }
 
 }
