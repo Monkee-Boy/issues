@@ -7,6 +7,7 @@ mBoy Issues has a goal of improving our current QA process of using Google Sprea
 
 <TODO: Actually have install docs.>
 
+* Setup Laravel - `composer install`
 * Setup database and run migrations - `php artisan migrate`
 * Install packages - `npm install`
 * Install components - `bower install`
