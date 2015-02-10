@@ -2,11 +2,5 @@
 /vendor
 composer.phar
 composer.lock
-.env.*.php
-.env.php
-/app/config/local
-/app/config/production
+.env
 /public/bower_components
-/config
-Capfile
-.capistrano
