@@ -1,27 +1,27 @@
-![Monkee-Boy](https://dujrsrsgsd3nh.cloudfront.net/img/emoticons/113009/mboy-1403710932.jpg) Issues [![GitHub version](https://badge.fury.io/gh/monkee-boy%2Fissues.svg)](http://badge.fury.io/gh/monkee-boy%2Fissues)
-===========
+## Laravel PHP Framework
 
-mBoy Issues has a goal of improving our current QA process of using Google Spreadsheets as a punchlist. We love GitHub issues but unfortunately it doesn't fit entirely into our workflow. Think of this as a simple clone of GitHub issues aimed at the QA phase of a project. Coded with Laravel and Polymer.
+[![Build Status](https://travis-ci.org/laravel/framework.svg)](https://travis-ci.org/laravel/framework)
+[![Total Downloads](https://poser.pugx.org/laravel/framework/d/total.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Stable Version](https://poser.pugx.org/laravel/framework/v/stable.svg)](https://packagist.org/packages/laravel/framework)
+[![Latest Unstable Version](https://poser.pugx.org/laravel/framework/v/unstable.svg)](https://packagist.org/packages/laravel/framework)
+[![License](https://poser.pugx.org/laravel/framework/license.svg)](https://packagist.org/packages/laravel/framework)
 
-## Setup
+Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable, creative experience to be truly fulfilling. Laravel attempts to take the pain out of development by easing common tasks used in the majority of web projects, such as authentication, routing, sessions, queueing, and caching.
 
-<TODO: Actually have install docs.>
+Laravel is accessible, yet powerful, providing powerful tools needed for large, robust applications. A superb inversion of control container, expressive migration system, and tightly integrated unit testing support give you the tools you need to build any application with which you are tasked.
 
-* Setup Laravel - `composer install`
-* Setup database and run migrations - `php artisan migrate`
-* Install packages - `npm install`
-* Install components - `bower install`
+## Official Documentation
 
-## The Troop
+Documentation for the framework can be found on the [Laravel website](http://laravel.com/docs).
 
-Created with ♥ by the [Monkee-Boy Troop](http://monkee-boy.com) in Austin, Texas.
+## Contributing
 
-| [![James Fleeting](https://avatars0.githubusercontent.com/u/23062?s=144)](https://github.com/fleeting) | [![Sarah Higley](https://avatars3.githubusercontent.com/u/3819570?s=144)](https://github.com/smhigley) | [![John Hoover](https://avatars2.githubusercontent.com/u/48278?s=144)](https://github.com/defvayne23) |
-|---|---|---|
-| [James Fleeting](http://github.com/fleeting) | [Sarah Higley](https://github.com/smhigley) | [John Hoover](https://github.com/defvayne23) |
+Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](http://laravel.com/docs/contributions).
 
-## License
+## Security Vulnerabilities
 
-mBoy Issues is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)
+If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell at taylor@laravel.com. All security vulnerabilities will be promptly addressed.
 
-![Monkee-Boy](http://www.monkee-boy.com/img/logo-withtag-vertical-dark.jpg)
+### License
+
+The Laravel framework is open-sourced software licensed under the [MIT license](http://opensource.org/licenses/MIT)

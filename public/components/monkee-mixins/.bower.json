@@ -1,0 +1,19 @@
+{
+  "name": "monkee-mixins",
+  "version": "1.8.1",
+  "main": "_mixins.scss",
+  "ignore": [
+    ".travis.yml",
+    "test/"
+  ],
+  "homepage": "https://github.com/Monkee-Boy/_mixins.scss",
+  "_release": "1.8.1",
+  "_resolution": {
+    "type": "version",
+    "tag": "1.8.1",
+    "commit": "59120fe8ec91b9e176652398d33f4427154a45ef"
+  },
+  "_source": "git://github.com/Monkee-Boy/_mixins.scss.git",
+  "_target": "*",
+  "_originalSource": "monkee-mixins"
+}
