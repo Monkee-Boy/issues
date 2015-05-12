@@ -12,11 +12,11 @@
 <body>
   <div class="row">
     <nav>
-      <div class="nav-wrapper">
+      <div class="nav-wrapper container">
         <div class="col s12">
-          <a href="#" class="brand-logo waves-effect waves-light"><img src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/93/mboy-new-monkeehead.png" style="height: 50px; vertical-align: middle;"> mBoy Issues</a>
+          <a href="#" class="brand-logo waves-effect waves-light"><img src="/images/logo.svg" style="height: 65px; vertical-align: middle;"></a>
 
-          <ul id="nav-mobile" class="right hide-on-med-and-down">
+          <ul class="right hide-on-med-and-down">
             <li><a href="#" title="Notifications" class="waves-effect waves-light"><i class="mdi-action-announcement"></i></a></li>
             <li><a href="/projects" title="View All Projects" class="waves-effect waves-light"><i class="mdi-action-view-list"></i></a></li>
             <li><a class="dropdown-button waves-effect waves-light" href="#" data-activates="user-dropdown"><?= Auth::user()->email; ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
@@ -33,22 +33,24 @@
     </nav>
   </div> <!-- /.row -->
 
-  <?php if(Session::has('message')) { ?>
-    <div class="row">
-      <div class="large-12 columns">
-        <div data-alert class="alert-box">
-          <?= Session::get('message'); ?>
-          <a href="#" class="close">&times;</a>
+  <div class="container">
+    <?php if(Session::has('message')) { ?>
+      <div class="row">
+        <div class="large-12 columns">
+          <div data-alert class="alert-box">
+            <?= Session::get('message'); ?>
+            <a href="#" class="close">&times;</a>
+          </div>
         </div>
       </div>
-    </div>
-  <?php } ?>
+    <?php } ?>
 
-  @yield('content')
+    @yield('content')
+  </div> <!-- /.container -->
 
   <div class="row">
     <footer class="page-footer" style="padding-top: 0;">
-      <div class="footer-copyright">
+      <div class="footer-copyright container">
         <div class="col s12">
           &copy; <?= date('Y'); ?> Monkee-Boy Web Design, Inc
           <a class="grey-text text-lighten-4 waves-effect waves-light right" href="https://github.com/Monkee-Boy/issues/issues">Submit a mBoy Issues Bug</a>

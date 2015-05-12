@@ -13,6 +13,9 @@
 
 Route::get('/', 'DashboardController@index');
 
+/* TODO: Add slugs to Projects to pretty urls. */
+// Route::model('projects', 'Project');
+// Route::bind('projects', function($value, $route) { return App\Project::whereSlug($value)->first(); });
 Route::resource('projects', 'ProjectController');
 
 // Route::resource('issues', 'IssueController', array('only' => array('store', 'update', 'destroy')));

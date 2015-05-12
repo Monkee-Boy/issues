@@ -4,3 +4,7 @@
 html, body {
   background: #ededed;
 }
+
+footer.page-footer .footer-copyright {
+  background: transparent; /* Overriding Materialize value */
+}

@@ -2,10 +2,14 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use App\Http\Requests\StoreProjectRequest;
 use Illuminate\Http\Request;
 use Auth;
+use Input;
+use Session;
+use Redirect;
 use App\User;
+use App\Project;
 
 class ProjectController extends Controller {
 	/**
@@ -28,8 +32,6 @@ class ProjectController extends Controller {
 		$user = User::find(Auth::user()->id);
     $projects = $user->projects;
 
-		//echo '<pre>'; print_r($projects); echo '</pre>';
-
 		return view('projects.index', array('projects'=>$projects));
 	}
 
@@ -40,7 +42,7 @@ class ProjectController extends Controller {
 	 */
 	public function create()
 	{
-		//
+		return view('projects.create');
 	}
 
 	/**
@@ -48,9 +50,19 @@ class ProjectController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(StoreProjectRequest $request)
 	{
-		//
+    $project = new Project;
+    $project->title = Input::get('title');
+		$project->url = Input::get('url');
+		$project->designed_by = Input::get('designed_by');
+		$project->developed_by = Input::get('developed_by');
+    $project->created_by = Auth::user()->id;
+    $project->save();
+    $project->users()->attach(Auth::user()->id);
+
+    Session::flash('message', Input::get('title').' was successfully created. You are ready to initiate QA.');
+    return Redirect::to('projects');
 	}
 
 	/**
@@ -61,7 +73,8 @@ class ProjectController extends Controller {
 	 */
 	public function show($id)
 	{
-		//
+		// There is no show for Projects, lets redirect to the issues instead.
+		// TODO: Add redirect to issues.
 	}
 
 	/**
@@ -72,7 +85,9 @@ class ProjectController extends Controller {
 	 */
 	public function edit($id)
 	{
-		//
+		$project = Project::find($id);
+
+		return view('projects.edit', array('project' => $project));
 	}
 
 	/**
@@ -81,9 +96,17 @@ class ProjectController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function update($id)
+	public function update($id, StoreProjectRequest $request)
 	{
-		//
+		$project = Project::find($id);
+		$project->title = Input::get('title');
+		$project->url = Input::get('url');
+		$project->designed_by = Input::get('designed_by');
+		$project->developed_by = Input::get('developed_by');
+		$project->save();
+
+    Session::flash('message', Input::get('title').' was successfully updated. Go forth and QA for as long as the sun is up.');
+    return Redirect::to('projects');
 	}
 
 	/**
@@ -94,7 +117,12 @@ class ProjectController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		$project = Project::find($id);
+		$project_title = $project->title;
+		$project->delete(); // softDelete is on so we are technically just archiving
+
+		Session::flash('message', $project_title.' was successfully archived. Congrats on another amazing round of QA.');
+    return Redirect::to('projects');
 	}
 
 }
