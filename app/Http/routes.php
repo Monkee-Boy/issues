@@ -12,12 +12,10 @@
 */
 
 Route::get('/', 'DashboardController@index');
-
-/* TODO: Add slugs to Projects to pretty urls. */
-// Route::model('projects', 'Project');
-// Route::bind('projects', function($value, $route) { return App\Project::whereSlug($value)->first(); });
+Route::resource('teams', 'TeamController');
 Route::resource('projects', 'ProjectController');
 
+/* TODO: Use project slugs for pretty urls. */
 // Route::resource('issues', 'IssueController', array('only' => array('store', 'update', 'destroy')));
 // Route::get('projects/{project_id}/issues', array('as' => 'project_issues', 'uses' => 'IssueController@index'));
 // Route::get('projects/{project_id}/issues/create', array('as' => 'project_issues_create', 'uses' => 'IssueController@create'));

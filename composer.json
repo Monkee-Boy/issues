@@ -7,7 +7,8 @@
 	"require": {
 		"laravel/framework": "5.0.*",
 		"laravelcollective/html": "~5.0",
-		"cviebrock/eloquent-sluggable": ">=3.0.0-alpha"
+		"cviebrock/eloquent-sluggable": ">=3.0.0-alpha",
+		"barryvdh/laravel-debugbar": "^2.0"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "~4.0",

@@ -45,6 +45,18 @@
       </div>
     <?php } ?>
 
+    <?php if(!empty($errors->all())): ?> <!-- TODO: Figure out a better display for errors. -->
+      <div class="row">
+        <div class="large-12 columns">
+          <ul>
+            <?php foreach($errors->all() as $error): ?>
+              <li class="error">{{ $error }}</li>
+            <?php endforeach; ?>
+          </ul>
+        </div>
+      </div>
+    <?php endif; ?>
+
     @yield('content')
   </div> <!-- /.container -->
 

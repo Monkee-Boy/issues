@@ -7,14 +7,6 @@
   </div>
 </div>
 
-<?php if(!empty($errors->all())): ?> <!-- TODO: Figure out a better display for errors. -->
-  <ul>
-    <?php foreach($errors->all() as $error): ?>
-      <li class="error">{{ $error }}</li>
-    <?php endforeach; ?>
-  </ul>
-<?php endif; ?>
-
 <div class="row">
   <?= Form::model($project, array('route' => array('projects.update', $project->id), 'method' => 'put', 'class' => 'col s12 m8 l8')) ?>
     <div class="row">
