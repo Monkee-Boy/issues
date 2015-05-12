@@ -149,6 +149,7 @@ return [
 		 * Third Party Providers...
 		 */
 		'Collective\Html\HtmlServiceProvider',
+		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 
 	],
 
