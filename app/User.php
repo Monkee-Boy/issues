@@ -40,4 +40,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	{
 		return $this->belongsToMany('App\Project', 'user_projects');
 	}
+
+	/**
+	* Teams Relationship
+	*
+	* @return Relationship
+	*/
+	public function teams()
+	{
+		return $this->belongsToMany('App\Team', 'user_teams');
+	}
 }

@@ -12,6 +12,7 @@
 */
 
 Route::get('/', 'DashboardController@index');
+Route::resource('users', 'UserController');
 Route::resource('teams', 'TeamController');
 Route::resource('projects', 'ProjectController');
 

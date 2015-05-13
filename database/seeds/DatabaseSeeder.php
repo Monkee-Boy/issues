@@ -14,7 +14,18 @@ class DatabaseSeeder extends Seeder {
 	{
 		Model::unguard();
 
-		// $this->call('UserTableSeeder');
+		/* Drop join tables. */
+		DB::table('user_projects')->delete();
+		DB::table('user_teams')->delete();
+
+		$this->call('ProjectTableSeeder');
+		$this->command->info('Project table seeded!');
+
+		$this->call('UserTableSeeder');
+		$this->command->info('User table seeded!');
+
+		$this->call('TeamTableSeeder');
+		$this->command->info('Team table seeded!');
 	}
 
 }

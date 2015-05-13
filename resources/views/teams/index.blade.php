@@ -13,19 +13,25 @@
 
 <div class="row">
   <?php if(!empty($teams)) { ?>
-    <?php foreach($teams as $team) { ?>
-      <div class="col s12 m6 l4">
-        <div class="card">
-          <div class="card-content">
-            <span class="card-title black-text"><?= $team->name; ?></span>
-          </div>
+    <table class="striped col s12">
+      <thead>
+        <tr>
+          <th data-field="name">Name</th>
+          <th data-field="email">Color</th>
+          <th data-field="actions"></th>
+        </tr>
+      </thead>
 
-          <div class="card-action">
-            <?= link_to_route('teams.edit', 'Edit Team', array($team->id)) ?>
-          </div>
-        </div> <!-- /.card -->
-      </div> <!-- /.col -->
-    <?php } ?>
+      <tbody>
+        <?php foreach($teams as $team) { ?>
+          <tr>
+            <td><?= $team->name; ?></td>
+            <td><?= $team->color; ?></td>
+            <td><?= link_to_route('teams.edit', 'Edit Team', array($team->id)) ?></td>
+          </tr>
+        <?php } ?>
+      </tbody>
+    </table>
   <?php } else { ?>
     <div class="col s12">
       <p>There are currently no teams.</p>

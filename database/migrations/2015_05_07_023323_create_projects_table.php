@@ -18,8 +18,6 @@ class CreateProjectsTable extends Migration {
 			$table->string('title', 255);
 			$table->string('designed_by', 255)->nullable();
 			$table->string('developed_by', 255)->nullable();
-			$table->integer('created_by')->unsigned()->index();
-			$table->foreign('created_by')->references('id')->on('users');
 			$table->timestamps();
 			$table->softDeletes();
 		});

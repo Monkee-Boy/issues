@@ -16,18 +16,20 @@
         <div class="col s12">
           <a href="#" class="brand-logo waves-effect waves-light"><img src="/images/logo.svg" style="height: 65px; vertical-align: middle;"></a>
 
-          <ul class="right hide-on-med-and-down">
-            <li><a href="#" title="Notifications" class="waves-effect waves-light"><i class="mdi-action-announcement"></i></a></li>
-            <li><a href="/projects" title="View All Projects" class="waves-effect waves-light"><i class="mdi-action-view-list"></i></a></li>
-            <li><a class="dropdown-button waves-effect waves-light" href="#" data-activates="user-dropdown"><?= Auth::user()->email; ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
-          </ul>
+          <?php if(Auth::check()) { ?>
+            <ul class="right hide-on-med-and-down">
+              <li><a href="#" title="Notifications" class="waves-effect waves-light"><i class="mdi-action-announcement"></i></a></li>
+              <li><a href="/projects" title="View All Projects" class="waves-effect waves-light"><i class="mdi-action-view-list"></i></a></li>
+              <li><a class="dropdown-button waves-effect waves-light" href="#" data-activates="user-dropdown"><?= Auth::user()->email; ?><i class="mdi-navigation-arrow-drop-down right"></i></a></li>
+            </ul>
 
-          <!-- Dropdown Structure -->
-          <ul id="user-dropdown" class="dropdown-content">
-            <li><a href="#">Edit Profile</a></li>
-            <li class="divider"></li>
-            <li><a href="/logout">Log Out</a></li>
-          </ul>
+            <!-- Dropdown Structure -->
+            <ul id="user-dropdown" class="dropdown-content">
+              <li><a href="#">Edit Profile</a></li>
+              <li class="divider"></li>
+              <li><a href="/auth/logout">Log Out</a></li>
+            </ul>
+          <?php } ?>
         </div>
       </div>
     </nav>

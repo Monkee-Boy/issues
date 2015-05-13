@@ -57,7 +57,6 @@ class ProjectController extends Controller {
 		$project->url = Input::get('url');
 		$project->designed_by = Input::get('designed_by');
 		$project->developed_by = Input::get('developed_by');
-    $project->created_by = Auth::user()->id;
     $project->save();
     $project->users()->attach(Auth::user()->id);
 
