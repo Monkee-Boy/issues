@@ -29,8 +29,7 @@ class ProjectController extends Controller {
 	 */
 	public function index()
 	{
-		$user = User::find(Auth::user()->id);
-    $projects = $user->projects;
+    $projects = Auth::user()->projects;
 
 		return view('projects.index', array('projects'=>$projects));
 	}

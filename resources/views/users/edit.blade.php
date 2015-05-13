@@ -31,9 +31,7 @@
           <h5>Select Teams</h5>
           <?php foreach($teams as $team) { ?>
             <p>
-              <?php //echo Form::checkbox('teams[]', $team->id, (in_array($team->id, $user->teams))); ?>
-              <?= Form::checkbox('teams[]', $team->id, array('name' => 'team-'.$team->id)); ?>
-              <!-- <input type="checkbox" name="teams[]" id="team-<?= $team->id; ?>" value="<?= $team->id; ?>"> -->
+              <input type="checkbox" name="teams[]" id="team-<?= $team->id; ?>" value="<?= $team->id; ?>"<?php if(in_array($team->id, $user_team_ids)) { ?> checked<?php } ?>>
               <label for="team-<?= $team->id; ?>"><?= $team->name; ?></label>
             </p>
           <?php } ?>

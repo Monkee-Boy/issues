@@ -94,7 +94,12 @@ class UserController extends Controller {
 		$user = User::where('id', $id)->with('teams')->first();
 		$teams = Team::all();
 
-		return view('users.edit', array('user' => $user, 'teams' => $teams));
+		$user_team_ids = null;
+		foreach($user->teams as $team) {
+			$user_team_ids[] = $team->id;
+		}
+
+		return view('users.edit', array('user' => $user, 'teams' => $teams, 'user_team_ids' => $user_team_ids));
 	}
 
 	/**
@@ -115,6 +120,8 @@ class UserController extends Controller {
 		$user->email = Input::get('email');
 		$user->save();
 
+		$user->teams()->sync(Input::get('teams'));
+
     Session::flash('message', Input::get('name').' was successfully updated.');
     return Redirect::to('users');
 	}
@@ -127,6 +134,6 @@ class UserController extends Controller {
 	 */
 	public function destroy($id)
 	{
-		//
+		// TODO: Deleting users needs to be worked out but after privileges.
 	}
 }
