@@ -44,14 +44,4 @@ class Issue extends Model {
     return $this->belongsTo('App\User', 'createdby_id');
   }
 
-  /**
-  * User relationship
-  *
-  * @return Relationship
-  */
-  public function assignedto()
-  {
-    return $this->belongsTo('App\User', 'assignedto_id');
-  }
-
 }

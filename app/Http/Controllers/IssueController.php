@@ -6,6 +6,7 @@ use League\CommonMark\CommonMarkConverter;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIssueRequest;
+use DB;
 use Auth;
 use Input;
 use Session;
@@ -100,12 +101,20 @@ class IssueController extends Controller {
 	/**
 	 * Display the specified resource.
 	 *
-	 * @param  int  $id
+	 * @param  int  $issue_id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($project_id, $issue_id)
 	{
-		//
+		$issue = Issue::where('id', $issue_id)->with('project', 'status', 'priority', 'createdby')->first();
+
+		if(!$issue) {
+			abort(404, 'Issue not found.');
+    }
+
+		$this->prepare_issue($issue);
+
+		return view('issues.show', array('issue' => $issue));
 	}
 
 	/**
@@ -158,7 +167,44 @@ class IssueController extends Controller {
 			$issue->assignedto = User::select('id', 'name')->where('id', $issue->assignedto_id)->first();
 		}
 
+		/* Get all activity for this issue and prepare each item. */
+		$issue_activity = DB::table('issue_activity')->where('issue_id', $issue->id)->get();
+
+		foreach($issue_activity as &$activity) {
+			$this->prepare_issue_activity($activity);
+		}
+
+		$issue->activity = $issue_activity;
+
 		return $issue;
+	}
+
+	/**
+	 * Clean up the resource and prepare it for View.
+	 *
+	 * @param  Object  $issue_activity
+	 * @return Object
+	 */
+	private function prepare_issue_activity($activity) {
+		/* Get the user that triggered this activity. */
+		$activity->user = User::select('id', 'name')->where('id', $activity->user_id)->first();
+
+		/* Based on the type lets figure out how to handle the data. */
+		if($activity->type === 'comment') {
+			$activity->data = $this->markdown->convertToHtml($activity->data);
+		} elseif($activity->type === 'assignment') {
+
+		} elseif($activity->type === 'status') {
+			$activity->status = Status::select('id', 'name')->where('id', $activity->data)->first();
+		} elseif($activity->type === 'priority') {
+			$activity->priority = Priority::select('id', 'name')->where('id', $activity->data)->first();
+		} elseif($activity->type === 'commit') {
+			/* TODO: Add ability to pull git commits from GitHub & Beanstalk and attach to an issue. */
+		} elseif($activity->type === 'mention') {
+			/* TODO: Add ability to mention an issue from within another issue. */
+		}
+
+		return $activity;
 	}
 
 }

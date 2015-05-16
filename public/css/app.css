@@ -8026,6 +8026,16 @@ html, body {
 .dropdown-content {
   z-index: 4; }
 
+.card-panel ul {
+  list-style-type: square;
+  list-style-position: inside; }
+  .card-panel ul li {
+    list-style-type: inherit; }
+
+.collection .collection-item.avatar {
+  min-height: 63px;
+  height: auto; }
+
 footer.page-footer .footer-copyright {
   background: transparent;
   /* Overriding Materialize value */ }
