@@ -85,6 +85,10 @@ class ProjectController extends Controller {
 	{
 		$project = Project::find($id);
 
+		if(!$project) {
+			abort(404, 'Project not found.');
+    }
+
 		return view('projects.edit', array('project' => $project));
 	}
 

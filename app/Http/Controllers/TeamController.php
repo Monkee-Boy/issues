@@ -85,6 +85,10 @@ class TeamController extends Controller {
 	{
 		$team = Team::find($id);
 
+		if(!$team) {
+			abort(404, 'Team not found.');
+    }
+
 		return view('teams.edit', array('team' => $team));
 	}
 

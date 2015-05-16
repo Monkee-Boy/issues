@@ -6,7 +6,7 @@
 
   <title>mBoy Issues</title>
 
-  <link rel="stylesheet" href="/css/app.min.css">
+  <link rel="stylesheet" href="/css/app<?php if(!$app->environment('local', 'dev', 'staging')) { ?>.min<?php } ?>.css">
   <script src="/js/modernizr.min.js"></script>
 </head>
 <body>
@@ -25,7 +25,7 @@
 
             <!-- Dropdown Structure -->
             <ul id="user-dropdown" class="dropdown-content">
-              <li><a href="#">Edit Profile</a></li>
+              <li><?= link_to_route('users.edit', 'Edit Profile', array(Auth::user()->id)) ?></li>
               <li class="divider"></li>
               <li><a href="/auth/logout">Log Out</a></li>
             </ul>
@@ -74,6 +74,6 @@
   </div> <!-- /.row -->
 
   <script src="//code.jquery.com/jquery-2.1.4.min.js"></script>
-  <script src="/js/materialize.min.js"></script>
+  <script src="/js/app<?php if(!$app->environment('local', 'dev', 'staging')) { ?>.min<?php } ?>.js"></script>
 </body>
 </html>

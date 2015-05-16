@@ -26,4 +26,14 @@ class Project extends Model implements SluggableInterface {
   {
     return $this->belongsToMany('App\User', 'user_projects');
   }
+
+	/**
+  * Issues Relationship
+  *
+  * @return Relationship
+  */
+  public function issues()
+  {
+    return $this->hasMany('App\Issue');
+  }
 }

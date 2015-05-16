@@ -6021,3 +6021,9 @@ Picker.extend( 'pickadate', DatePicker )
   });
 
 }( jQuery ));
+
+(function($) {
+  'use strict';
+
+  $('select').material_select();
+}(jQuery));

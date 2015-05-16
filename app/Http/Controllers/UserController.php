@@ -92,6 +92,11 @@ class UserController extends Controller {
 	public function edit($id)
 	{
 		$user = User::where('id', $id)->with('teams')->first();
+
+		if(!$user) {
+			abort(404, 'User not found.');
+    }
+
 		$teams = Team::all();
 
 		$user_team_ids = null;

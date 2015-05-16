@@ -8019,6 +8019,13 @@ button.picker__today:focus, button.picker__clear:focus, button.picker__close:foc
 html, body {
   background: #ededed; }
 
+/* Materialize Override
+ * This fixes the issue where the materialize <select> appears behind buttons
+ * and other elements that it shouldn't.
+ */
+.dropdown-content {
+  z-index: 4; }
+
 footer.page-footer .footer-copyright {
   background: transparent;
   /* Overriding Materialize value */ }
