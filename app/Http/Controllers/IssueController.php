@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\StoreIssueRequest;
 use Auth;
 use Input;
 use Session;
@@ -39,6 +40,10 @@ class IssueController extends Controller {
 			abort(404, 'Project not found.');
     }
 
+		foreach($project->issues as &$issue) {
+			$this->prepare_issue($issue);
+		}
+
 		return view('issues.index', array('project' => $project));
 	}
 
@@ -68,9 +73,24 @@ class IssueController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store()
+	public function store(StoreIssueRequest $request)
 	{
-		//
+		$assignedto = explode('-', Input::get('assignedto')); // assignedto is TEAM-USER_ID
+
+		$issue = new Issue;
+		$issue->project_id = Input::get('project_id');
+		$issue->title = Input::get('title');
+		$issue->content = Input::get('content');
+		$issue->link = Input::get('link');
+		$issue->status_id = 1;
+		$issue->priority_id = Input::get('priority_id');
+		$issue->assignedto_id = $assignedto[1];
+		$issue->assignedto_type = $assignedto[0];
+		$issue->createdby_id = Input::get('createdby_id');
+    $issue->save();
+
+    Session::flash('message', Input::get('title').' was successfully created.');
+    return Redirect::route('project_issues', [Input::get('project_id')]);
 	}
 
 	/**
@@ -115,6 +135,22 @@ class IssueController extends Controller {
 	public function destroy($id)
 	{
 		//
+	}
+
+	/**
+	 * Clean up the resource and prepare it for View.
+	 *
+	 * @param  Object  $issue
+	 * @return Object
+	 */
+	private function prepare_issue($issue) {
+		if($issue->assignedto_type === 'team') {
+			$issue->assignedto = Team::select('id', 'name')->where('id', $issue->assignedto_id)->first();
+		} elseif($issue->assignedto_type === 'user') {
+			$issue->assignedto = User::select('id', 'name')->where('id', $issue->assignedto_id)->first();
+		}
+
+		return $issue;
 	}
 
 }

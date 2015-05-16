@@ -18,8 +18,6 @@
       </div>
     </div>
 
-    <!-- assignedto_id -->
-
     <div class="row">
       <div class="col s12 m8">
         <div class="row">

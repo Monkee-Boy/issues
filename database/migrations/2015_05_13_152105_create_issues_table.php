@@ -19,7 +19,7 @@ class CreateIssuesTable extends Migration {
 			$table->longText('content');
 			$table->string('link', 255)->nullable();
 			$table->integer('assignedto_id')->unsigned()->index();
-			$table->tinyInteger('assigned_type')->unsigned()->index();
+			$table->string('assignedto_type', 255);
 			$table->integer('status_id')->unsigned()->index();
 			$table->foreign('status_id')->references('id')->on('statuses');
 			$table->integer('priority_id')->unsigned()->index();
