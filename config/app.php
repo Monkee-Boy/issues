@@ -151,6 +151,7 @@ return [
 		'Collective\Html\HtmlServiceProvider',
 		'Cviebrock\EloquentSluggable\SluggableServiceProvider',
 		'Barryvdh\Debugbar\ServiceProvider',
+		'GrahamCampbell\Markdown\MarkdownServiceProvider',
 
 	],
 
@@ -206,6 +207,7 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
     'Html' => 'Collective\Html\HtmlFacade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
+		'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown'
 
 	],
 

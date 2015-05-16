@@ -2,6 +2,7 @@
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use League\CommonMark\CommonMarkConverter;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\StoreIssueRequest;
@@ -17,14 +18,17 @@ use App\Priority;
 use App\Team;
 
 class IssueController extends Controller {
+	protected $markdown;
+
 	/**
 	 * Create a new controller instance.
 	 *
 	 * @return void
 	 */
-	public function __construct()
+	public function __construct(CommonMarkConverter $markdown)
 	{
 		$this->middleware('auth');
+		$this->markdown = $markdown;
 	}
 
 	/**
@@ -144,6 +148,10 @@ class IssueController extends Controller {
 	 * @return Object
 	 */
 	private function prepare_issue($issue) {
+		/* Need to convert any markdown in the content to HTML. */
+		$issue->content = $this->markdown->convertToHtml($issue->content);
+
+		/* Figure out who exactly the issue is assigned to. */
 		if($issue->assignedto_type === 'team') {
 			$issue->assignedto = Team::select('id', 'name')->where('id', $issue->assignedto_id)->first();
 		} elseif($issue->assignedto_type === 'user') {
