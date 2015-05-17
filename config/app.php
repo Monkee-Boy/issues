@@ -207,7 +207,8 @@ return [
 		'Form' => 'Collective\Html\FormFacade',
     'Html' => 'Collective\Html\HtmlFacade',
 		'Debugbar' => 'Barryvdh\Debugbar\Facade',
-		'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown'
+		'Markdown' => 'GrahamCampbell\Markdown\Facades\Markdown',
+		'Carbon' => 'Carbon\Carbon',
 
 	],
 

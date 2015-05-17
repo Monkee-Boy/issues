@@ -8026,15 +8026,31 @@ html, body {
 .dropdown-content {
   z-index: 4; }
 
+/* Materialize Override
+ * Need to add list-style back for card-panel.
+ */
 .card-panel ul {
   list-style-type: square;
   list-style-position: inside; }
   .card-panel ul li {
     list-style-type: inherit; }
 
-.collection .collection-item.avatar {
-  min-height: 63px;
-  height: auto; }
+/* Custom Collection Styling
+ * Overriding some Materialize collection styling for the issue-activity.
+ */
+.collection.issue-activity {
+  border: 0; }
+  .collection.issue-activity .collection-item {
+    margin-bottom: 20px;
+    min-height: 63px;
+    height: auto;
+    border: 0; }
+    .collection.issue-activity .collection-item.avatar i.circle {
+      width: 35px;
+      height: 35px;
+      line-height: 35px; }
+  .collection.issue-activity .activity-status, .collection.issue-activity .activity-priority, .collection.issue-activity .activity-assignment {
+    background: transparent; }
 
 footer.page-footer .footer-copyright {
   background: transparent;

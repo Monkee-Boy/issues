@@ -13,6 +13,9 @@ html, body {
   z-index: 4;
 }
 
+/* Materialize Override
+ * Need to add list-style back for card-panel.
+ */
 .card-panel ul {
   list-style-type: square;
   list-style-position: inside;
@@ -22,9 +25,28 @@ html, body {
   }
 }
 
-.collection .collection-item.avatar {
-  min-height: 63px;
-  height: auto;
+/* Custom Collection Styling
+ * Overriding some Materialize collection styling for the issue-activity.
+ */
+.collection.issue-activity {
+  border: 0;
+
+  .collection-item {
+    margin-bottom: 20px;
+    min-height: 63px;
+    height: auto;
+    border: 0;
+
+    &.avatar i.circle {
+      width: 35px;
+      height: 35px;
+      line-height: 35px;
+    }
+  }
+
+  .activity-status, .activity-priority, .activity-assignment {
+    background: transparent;
+  }
 }
 
 footer.page-footer .footer-copyright {

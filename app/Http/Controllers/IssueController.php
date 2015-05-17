@@ -17,6 +17,7 @@ use App\Issue;
 use App\Status;
 use App\Priority;
 use App\Team;
+use Carbon\Carbon;
 
 class IssueController extends Controller {
 	protected $markdown;
@@ -160,6 +161,10 @@ class IssueController extends Controller {
 		/* Need to convert any markdown in the content to HTML. */
 		$issue->content = $this->markdown->convertToHtml($issue->content);
 
+		/* Add some human readable dates. */
+		$issue->created_at_formatted = Carbon::parse($issue->created_at)->diffForHumans();
+		$issue->updated_at_formatted = Carbon::parse($issue->updated_at)->diffForHumans();
+
 		/* Figure out who exactly the issue is assigned to. */
 		if($issue->assignedto_type === 'team') {
 			$issue->assignedto = Team::select('id', 'name')->where('id', $issue->assignedto_id)->first();
@@ -182,18 +187,30 @@ class IssueController extends Controller {
 	/**
 	 * Clean up the resource and prepare it for View.
 	 *
-	 * @param  Object  $issue_activity
+	 * @param  Object  $activity
 	 * @return Object
 	 */
 	private function prepare_issue_activity($activity) {
 		/* Get the user that triggered this activity. */
 		$activity->user = User::select('id', 'name')->where('id', $activity->user_id)->first();
 
+		/* Add some human readable dates. */
+		$activity->created_at_formatted = Carbon::parse($activity->created_at)->diffForHumans();
+		$activity->updated_at_formatted = Carbon::parse($activity->updated_at)->diffForHumans();
+
 		/* Based on the type lets figure out how to handle the data. */
 		if($activity->type === 'comment') {
+			/* Need to convert any markdown in the content to HTML. */
 			$activity->data = $this->markdown->convertToHtml($activity->data);
 		} elseif($activity->type === 'assignment') {
+			$assignment = json_decode($activity->data);
 
+			/* Figure out who exactly the issue is assigned to. */
+			if($assignment->assignedto_type === 'team') {
+				$activity->assignment = Team::select('id', 'name')->where('id', $assignment->assignedto_id)->first();
+			} elseif($assignment->assignedto_type === 'user') {
+				$activity->assignment = User::select('id', 'name')->where('id', $assignment->assignedto_id)->first();
+			}
 		} elseif($activity->type === 'status') {
 			$activity->status = Status::select('id', 'name')->where('id', $activity->data)->first();
 		} elseif($activity->type === 'priority') {
