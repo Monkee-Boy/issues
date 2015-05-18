@@ -8027,13 +8027,25 @@ html, body {
   z-index: 4; }
 
 /* Materialize Override
- * Need to add list-style back for card-panel.
+ * Need to add list-style back for specific elements.
  */
-.card-panel ul {
+.card-panel ul, .activity-comment ul {
   list-style-type: square;
   list-style-position: inside; }
-  .card-panel ul li {
+  .card-panel ul li, .activity-comment ul li {
     list-style-type: inherit; }
+
+.issue-status {
+  display: inline-block;
+  line-height: 1;
+  margin-bottom: auto;
+  position: relative;
+  text-align: center;
+  text-decoration: none;
+  white-space: nowrap;
+  padding: 5px 12px;
+  background-color: #ccc;
+  color: #fff; }
 
 /* Custom Collection Styling
  * Overriding some Materialize collection styling for the issue-activity.

@@ -115,7 +115,12 @@ class IssueController extends Controller {
 
 		$this->prepare_issue($issue);
 
-		return view('issues.show', array('issue' => $issue));
+		$statuses = Status::select('id', 'name')->get();
+		$priorities = Priority::select('id', 'name')->get();
+		$users = User::select('id', 'name')->get();
+		$teams = Team::select('id', 'name')->get();
+
+		return view('issues.show', array('issue' => $issue, 'statuses' => $statuses, 'priorities' => $priorities, 'users' => $users, 'teams' => $teams));
 	}
 
 	/**
@@ -175,11 +180,17 @@ class IssueController extends Controller {
 		/* Get all activity for this issue and prepare each item. */
 		$issue_activity = DB::table('issue_activity')->where('issue_id', $issue->id)->get();
 
+		$comment_count = 0;
 		foreach($issue_activity as &$activity) {
 			$this->prepare_issue_activity($activity);
+
+			if($activity->type === 'comment') {
+				$comment_count++;
+			}
 		}
 
 		$issue->activity = $issue_activity;
+		$issue->comment_count = $comment_count;
 
 		return $issue;
 	}
@@ -212,7 +223,7 @@ class IssueController extends Controller {
 				$activity->assignment = User::select('id', 'name')->where('id', $assignment->assignedto_id)->first();
 			}
 		} elseif($activity->type === 'status') {
-			$activity->status = Status::select('id', 'name')->where('id', $activity->data)->first();
+			$activity->status = Status::select('id', 'name', 'color')->where('id', $activity->data)->first();
 		} elseif($activity->type === 'priority') {
 			$activity->priority = Priority::select('id', 'name')->where('id', $activity->data)->first();
 		} elseif($activity->type === 'commit') {

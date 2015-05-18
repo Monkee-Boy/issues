@@ -16,6 +16,7 @@ class CreateStatusesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name', 255);
+			$table->string('color', 255)->nullable();
 			$table->timestamps();
 		});
 	}

@@ -71,7 +71,6 @@
           <div class="row">
             <div class="input-field-off col s12">
               <?= Form::label('assignedto', 'Assign To'); ?>
-
               <select name="assignedto" id="assignedto" class="browser-default">
                 <optgroup label="Teams">
                   <?php foreach($teams as $team) { ?>
